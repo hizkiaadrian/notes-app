@@ -17,7 +17,7 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :text %>
+    <%= form.label :text, 'Markdown Text' %>
     <div class="col-md-8 col-xl-4 pl-0">
       <%= form.text_area :text, class: "form-control" %>
     </div>
@@ -31,10 +31,6 @@
     document.querySelector("textarea").addEventListener('input', function (event) {
         autoExpand(event.target);
     }, false);
-
-    window.addEventListener('load', () => {
-        autoExpand(document.querySelector("textarea"));
-    })
 
     const autoExpand = (field) => {
 
