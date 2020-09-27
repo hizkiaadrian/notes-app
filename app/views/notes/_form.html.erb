@@ -1,26 +1,57 @@
 <%= form_with model: @note, local: true do |form| %>
   <% if @note.errors.any? %>
     <div id="error_explanation">
-      <ul>
-        <% @note.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+      <% @note.errors.full_messages.each do |msg| %>
+        <div class="alert alert-danger" role="alert">
+          <%= msg %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 
-  <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </p>
+  <div class="form-group">
+    <%= form.label :title %>
+    <div class="col-md-8 col-xl-4 pl-0">
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :text %><br>
-    <%= form.text_area :text %>
-  </p>
+  <div class="form-group">
+    <%= form.label :text %>
+    <div class="col-md-8 col-xl-4 pl-0">
+      <%= form.text_area :text, class: "form-control" %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.submit %>
-  </p>
-
+  <%= form.submit "Save", class: "btn btn-primary" %>
+  <%= link_to "Cancel", notes_path, class: "btn btn-outline-danger" %>
 <% end %>
+
+<script>
+    document.querySelector("textarea").addEventListener('input', function (event) {
+        autoExpand(event.target);
+    }, false);
+
+    window.addEventListener('load', () => {
+        autoExpand(document.querySelector("textarea"));
+    })
+
+    const autoExpand = (field) => {
+
+        // Reset field height
+        field.style.height = 'inherit';
+
+        // Get the computed styles for the element
+        let computed = window.getComputedStyle(field);
+
+        // Calculate the height
+        const height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+            + parseInt(computed.getPropertyValue('padding-top'), 10)
+            + field.scrollHeight
+            + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+            + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+        field.style.height = height + 'px';
+
+    };
+</script>
