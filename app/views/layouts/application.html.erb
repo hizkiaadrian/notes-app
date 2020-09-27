@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Notes App</title>
     <%= csrf_meta_tags %>
@@ -9,7 +9,13 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column" style="min-height: 100vh">
+  <nav class="navbar navbar-light bg-warning shadow sticky-top">
+    <a class="navbar-brand" href="/">Notes App</a>
+  </nav>
+  <main class="container-fluid py-3 d-flex flex-column flex-grow-1">
     <%= yield %>
+  </main>
+  <footer class="card card-footer">Notes App by Hizkia Adrian Susanto</footer>
   </body>
 </html>
